@@ -11,6 +11,16 @@
 #' @param f8.comp Flow component with all user-defined inputs for Habplan run
 #' @param f9.comp Flow component with all user-defined inputs for Habplan run
 #' @param f10.comp Flow component with all user-defined inputs for Habplan run
+#' @param block1 Block size component with all user-defined inputs for Habplan run
+#' @param block2 Block size component with all user-defined inputs for Habplan run
+#' @param block3 Block size component with all user-defined inputs for Habplan run
+#' @param block4 Block size component with all user-defined inputs for Habplan run
+#' @param block5 Block size component with all user-defined inputs for Habplan run
+#' @param block6 Block size component with all user-defined inputs for Habplan run
+#' @param block7 Block size component with all user-defined inputs for Habplan run
+#' @param block8 Block size component with all user-defined inputs for Habplan run
+#' @param block9 Block size component with all user-defined inputs for Habplan run
+#' @param block10 Block size component with all user-defined inputs for Habplan run
 #' @return An .xml file called "project" saved in the working directory
 #' @examples
 #'
@@ -222,9 +232,11 @@
 #'           f4.comp= f4.comp)
 #' @export
 
-writeProj <- function(f1.comp = "", f2.comp = "", f3.comp = "", f4.comp = "",
-                      f5.comp = "", f6.comp = "", f7.comp = "", f8.comp = "",
-                      f9.comp = "", f10.comp = ""){
+writeProj <- function(f1.comp = "", block1 = "", f2.comp = "", block2 = "",
+                      f3.comp = "", block3 = "", f4.comp = "", block4 = "",
+                      f5.comp = "", block5 = "", f6.comp = "", block6 = "",
+                      f7.comp = "", block7 = "", f8.comp = "", block8 = "",
+                      f9.comp = "", block9 = "", f10.comp = "", block10 = ""){
 
   proj.file <- file("./project.xml")
 
@@ -243,10 +255,11 @@ writeProj <- function(f1.comp = "", f2.comp = "", f3.comp = "", f4.comp = "",
                "",
                "<components>",
                "",
-               f1.comp, "", f2.comp, "", f3.comp, "", f4.comp, "", f5.comp,
-               "",
-               f6.comp, "", f7.comp, "", f8.comp, "", f9.comp, "", f10.comp,
-               "",
+               f1.comp, "", block1, "", f2.comp, "", block2, "",
+               f3.comp, "", block3, "", f4.comp, "", block4, "",
+               f5.comp, "", block5, "", f6.comp, "", block6, "",
+               f7.comp, "", block7, "", f8.comp, "", block8, "",
+               f9.comp, "", block9, "", f10.comp, "", block10, "",
                "</components>",
                "",
                "<bestschedule>",
@@ -256,14 +269,29 @@ writeProj <- function(f1.comp = "", f2.comp = "", f3.comp = "", f4.comp = "",
                "",
                "<output>",
                '<importSave value="true" />',
-               paste0('<schedFile value="', wd, '/example/RCW/RCW/Outputs/saveSched" check="true" />'),
-               paste0('<graphFile value="', wd, '/example/RCW/RCW/Outputs/saveGraph" check="false" />'),
-               paste0('<flowFile title="F1" value="', wd, '/example/RCW/RCW/Outputs/saveFlow1" check="true" />'),
-               paste0('<flowFile title="F2" value="', wd, '/example/RCW/RCW/Outputs/saveFlow2" check="true" />'),
-               paste0('<flowFile title="F3" value="', wd, '/example/RCW/RCW/Outputs/saveFlow3" check="true" />'),
-               paste0('<flowFile title="F4" value="', wd, '/example/RCW/RCW/Outputs/saveFlow4" check="true" />'),
-               paste0('<flowFile title="F5" value="', wd, '/example/RCW/RCW/Outputs/saveFlow5" check="true" />'),
-               paste0('<flowFile title="F6" value="', wd, '/example/RCW/RCW/Outputs/saveFlow6" check="true" />'),
+               paste0('<schedFile value="', wd, '/Outputs/saveSched" check="true" />'),
+               paste0('<graphFile value="', wd, '/Outputs/saveGraph" check="false" />'),
+               paste0('<flowFile title="F1" value="', wd, '/Outputs/saveFlow1" check="true" />'),
+               paste0('<blockFile title="BK1" value="', wd, '/Outputs/saveBlock1" check="true" />'),
+               paste0('<flowFile title="F2" value="', wd, '/Outputs/saveFlow2" check="true" />'),
+               paste0('<blockFile title="BK2" value="', wd, '/Outputs/saveBlock2" check="true" />'),
+               paste0('<flowFile title="F3" value="', wd, '/Outputs/saveFlow3" check="true" />'),
+               paste0('<blockFile title="BK3" value="', wd, '/Outputs/saveBlock3" check="true" />'),
+               paste0('<flowFile title="F4" value="', wd, '/Outputs/saveFlow4" check="true" />'),
+               paste0('<blockFile title="BK4" value="', wd, '/Outputs/saveBlock4" check="true" />'),
+               paste0('<flowFile title="F5" value="', wd, '/Outputs/saveFlow5" check="true" />'),
+               paste0('<blockFile title="BK5" value="', wd, '/Outputs/saveBlock5" check="true" />'),
+               paste0('<flowFile title="F6" value="', wd, '/Outputs/saveFlow6" check="true" />'),
+               paste0('<blockFile title="BK6" value="', wd, '/Outputs/saveBlock6" check="true" />'),
+               paste0('<flowFile title="F7" value="', wd, '/Outputs/saveFlow7" check="true" />'),
+               paste0('<blockFile title="BK7" value="', wd, '/Outputs/saveBlock7" check="true" />'),
+               paste0('<flowFile title="F8" value="', wd, '/Outputs/saveFlow8" check="true" />'),
+               paste0('<blockFile title="BK8" value="', wd, '/Outputs/saveBlock8" check="true" />'),
+               paste0('<flowFile title="F9" value="', wd, '/Outputs/saveFlow9" check="true" />'),
+               paste0('<blockFile title="BK9" value="', wd, '/Outputs/saveBlock9" check="true" />'),
+               paste0('<flowFile title="F10" value="', wd, '/Outputs/saveFlow10" check="true" />'),
+               paste0('<blockFile title="BK10" value="', wd, '/Outputs/saveBlock10" check="true" />'),
+
                '<bounds height="262" width="473" x="437" y="317" />',
                "</output>",
                "",
