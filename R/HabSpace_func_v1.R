@@ -99,7 +99,7 @@ new.data <- new.data[ -c(10) ]
     lsm.test <- calculate_lsm(site.rast, level = level)
     lsm.test
     write_csv(x = lsm.test,
-              file = paste0("./example/RCW/RCW/Outputs/Patch_maps/lsm_sum_", i, ".csv"))
+              file = paste0("./Outputs/Patch_maps/lsm_sum_", i, ".csv"))
     ##End lsm tests##
 
     #plot(site.vect)
@@ -147,7 +147,7 @@ new.data <- new.data[ -c(10) ]
 
     rcw.shp
 
-    ggsave(file = paste0("./example/RCW/RCW/Outputs/Patch_maps/Patch_map_", i, ".png"),
+    ggsave(file = paste0("./Outputs/Patch_maps/Patch_map_", i, ".png"),
            width = 200, height = 120, dpi = 600, units = "mm")
   }
   patch.data <- bind_rows(ptch.list, .id = "year")
@@ -187,7 +187,7 @@ new.data <- new.data[ -c(10) ]
 
   max.ptch
 
-  ggsave(file = paste0("./example/RCW/RCW/Outputs/Patch_maps/Max_patch.png"),
+  ggsave(file = paste0("./Outputs/Patch_maps/Max_patch.png"),
          width = 200, height = 120, dpi = 600, units = "mm")
 
   #Plot patch summary figures
@@ -202,7 +202,7 @@ new.data <- new.data[ -c(10) ]
 
   min.ptch
 
-  ggsave(file = paste0("./example/RCW/RCW/Outputs/Patch_maps/Min_patch.png"),
+  ggsave(file = paste0("./Outputs/Patch_maps/Min_patch.png"),
          width = 200, height = 120, dpi = 600, units = "mm")
 
   #Plot patch summary figures
@@ -217,7 +217,7 @@ new.data <- new.data[ -c(10) ]
 
   mean.ptch
 
-  ggsave(file = paste0("./example/RCW/RCW/Outputs/Patch_maps/Mean_patch.png"),
+  ggsave(file = paste0("./Outputs/Patch_maps/Mean_patch.png"),
          width = 200, height = 120, dpi = 600, units = "mm")
 
   #Plot patch summary figures
@@ -232,7 +232,7 @@ new.data <- new.data[ -c(10) ]
 
   tot.ptch
 
-  ggsave(file = paste0("./example/RCW/RCW/Outputs/Patch_maps/Total_patch.png"),
+  ggsave(file = paste0("./Outputs/Patch_maps/Total_patch.png"),
          width = 200, height = 120, dpi = 600, units = "mm")
 
   #Plot patch summary figures
@@ -247,13 +247,13 @@ new.data <- new.data[ -c(10) ]
 
   sum.ptch
 
-  ggsave(file = paste0("./example/RCW/RCW/Outputs/Patch_maps/Tot_num_patch.png"),
+  ggsave(file = paste0("./Outputs/Patch_maps/Tot_num_patch.png"),
          width = 200, height = 120, dpi = 600, units = "mm")
 
   colnames(patch.sum) <- c("Year", "Number of patches", "Min. patch size",
                            "Max. patch size", "Mean patch size", "Total area")
   write_csv(x = patch.sum,
-            file = "./example/RCW/RCW/Outputs/Patch_maps/Patch_data_summary.csv")
+            file = "./Outputs/Patch_maps/Patch_data_summary.csv")
 
 
   return(patch.sum)
