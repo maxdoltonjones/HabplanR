@@ -19,7 +19,7 @@ HabBlock(std.data, std.info, site.shp, block.title)
 Saves a .dat file in the working directory ready for import to Habplan
 }
 \description{
-Creates flow files from csv input data
+Creates block data files from .shp input data
 }
 \examples{
 #Read in stand and regime information
