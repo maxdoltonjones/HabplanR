@@ -108,7 +108,7 @@ habConvert <- function(std.data, std.info, col, nyear, HSI = NA){
     std.list[[j]] <- vec
   }
   final.data <- unlist(std.list)
-  data.file <- file(paste0("./example/RCW/RCW/Flows/", colnames(temp.data[col]), ".dat"))
+  data.file <- file(paste0("./Flows/", colnames(temp.data[col]), ".dat"))
   writeLines(final.data, data.file)
   close(data.file)
   return(final.data)
