@@ -1,0 +1,137 @@
+<?xml version="1.0" ?>
+<project>
+
+<general>
+<![CDATA[ 
+  Maine from FIA data
+]]>
+<iters value="10000" />
+<units value="" />
+<useunits value="false" />
+<home value="C:/Users/maxdoltonjones/Documents/Habplan/Habplan3/Habplan3" />
+</general>
+
+<components>
+
+<flow title="F1 Component">
+<file value="RCW/RCW/Flows/HSI.dat" />
+<bygone value="" />
+<time0 value="10000" />
+<goal0 value="0.1" />
+<threshLo value="1000" />
+<threshHi value="5000" />
+<goalPlus value=".05" />
+<goalF value="0.5" />
+<slope value="0.0" />
+<weightF value="1.0" />
+<weight0 value="1.0" />
+<model value="1,1000;20,2500;30,5000;" />
+<title value="Breed.dat" />
+<bounds height="330" width="366" x="553" y="443" />
+</flow>
+
+
+
+<flow title="F2 Component">
+<file value="RCW/RCW/Flows/Harv_P_Pulp_Tons.dat" />
+<bygone value="" />
+<time0 value="1000" />
+<goal0 value="0.1" />
+<threshLo value="1000" />
+<threshHi value="5000" />
+<goalPlus value=".05" />
+<goalF value="0.5" />
+<slope value="0.0" />
+<weightF value="1.0" />
+<weight0 value="1.0" />
+<title value="Harv_P_Pulp_Tons.dat" />
+<bounds height="331" width="368" x="1260" y="440" />
+</flow>
+
+<block title="BK1(2) Component">
+<file value="RCW/RCW/Flows/block2.txt" />
+<notBlock value="1-4" />
+<greenUp value="3" />
+<min value="1" />
+<max value="1000" />
+<goal value="1" />
+<weight value="1.0" />
+<title value="block2.txt" />
+<bounds height="330" width="366" x="553" y="443" />
+</block>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</components>
+
+<bestschedule>
+<weight value="1.0,1.0,1.0,1.0" />
+<state value="0,0,0,0" />
+</bestschedule>
+
+<output>
+<importSave value="true" />
+<schedFile value="C:/Users/maxdoltonjones/Documents/Habplan/Habplan3/Habplan3/example/RCW/RCW/Outputs/saveSched" check="true" />
+<graphFile value="C:/Users/maxdoltonjones/Documents/Habplan/Habplan3/Habplan3/example/RCW/RCW/Outputs/saveGraph" check="false" />
+<flowFile title="F1" value="C:/Users/maxdoltonjones/Documents/Habplan/Habplan3/Habplan3/example/RCW/RCW/Outputs/saveFlow1" check="true" />
+<blockFile title="BK1" value="C:/Users/maxdoltonjones/Documents/Habplan/Habplan3/Habplan3/example/RCW/RCW/Outputs/saveBlock1" check="true" />
+<flowFile title="F2" value="C:/Users/maxdoltonjones/Documents/Habplan/Habplan3/Habplan3/example/RCW/RCW/Outputs/saveFlow2" check="true" />
+<blockFile title="BK2" value="C:/Users/maxdoltonjones/Documents/Habplan/Habplan3/Habplan3/example/RCW/RCW/Outputs/saveBlock2" check="true" />
+<flowFile title="F3" value="C:/Users/maxdoltonjones/Documents/Habplan/Habplan3/Habplan3/example/RCW/RCW/Outputs/saveFlow3" check="true" />
+<blockFile title="BK3" value="C:/Users/maxdoltonjones/Documents/Habplan/Habplan3/Habplan3/example/RCW/RCW/Outputs/saveBlock3" check="true" />
+<flowFile title="F4" value="C:/Users/maxdoltonjones/Documents/Habplan/Habplan3/Habplan3/example/RCW/RCW/Outputs/saveFlow4" check="true" />
+<blockFile title="BK4" value="C:/Users/maxdoltonjones/Documents/Habplan/Habplan3/Habplan3/example/RCW/RCW/Outputs/saveBlock4" check="true" />
+<flowFile title="F5" value="C:/Users/maxdoltonjones/Documents/Habplan/Habplan3/Habplan3/example/RCW/RCW/Outputs/saveFlow5" check="true" />
+<blockFile title="BK5" value="C:/Users/maxdoltonjones/Documents/Habplan/Habplan3/Habplan3/example/RCW/RCW/Outputs/saveBlock5" check="true" />
+<flowFile title="F6" value="C:/Users/maxdoltonjones/Documents/Habplan/Habplan3/Habplan3/example/RCW/RCW/Outputs/saveFlow6" check="true" />
+<blockFile title="BK6" value="C:/Users/maxdoltonjones/Documents/Habplan/Habplan3/Habplan3/example/RCW/RCW/Outputs/saveBlock6" check="true" />
+<flowFile title="F7" value="C:/Users/maxdoltonjones/Documents/Habplan/Habplan3/Habplan3/example/RCW/RCW/Outputs/saveFlow7" check="true" />
+<blockFile title="BK7" value="C:/Users/maxdoltonjones/Documents/Habplan/Habplan3/Habplan3/example/RCW/RCW/Outputs/saveBlock7" check="true" />
+<flowFile title="F8" value="C:/Users/maxdoltonjones/Documents/Habplan/Habplan3/Habplan3/example/RCW/RCW/Outputs/saveFlow8" check="true" />
+<blockFile title="BK8" value="C:/Users/maxdoltonjones/Documents/Habplan/Habplan3/Habplan3/example/RCW/RCW/Outputs/saveBlock8" check="true" />
+<flowFile title="F9" value="C:/Users/maxdoltonjones/Documents/Habplan/Habplan3/Habplan3/example/RCW/RCW/Outputs/saveFlow9" check="true" />
+<blockFile title="BK9" value="C:/Users/maxdoltonjones/Documents/Habplan/Habplan3/Habplan3/example/RCW/RCW/Outputs/saveBlock9" check="true" />
+<flowFile title="F10" value="C:/Users/maxdoltonjones/Documents/Habplan/Habplan3/Habplan3/example/RCW/RCW/Outputs/saveFlow10" check="true" />
+<blockFile title="BK10" value="C:/Users/maxdoltonjones/Documents/Habplan/Habplan3/Habplan3/example/RCW/RCW/Outputs/saveBlock10" check="true" />
+<bounds height="262" width="473" x="437" y="317" />
+</output>
+
+<schedule>
+<config value="2,0,0,0,1,0,0,0" />
+<npolys value="505" />
+<objective value="1,0,0,0,0,0,0,0,0,0,0" />
+<import value="false" />
+</schedule>
+
+</project>
+
