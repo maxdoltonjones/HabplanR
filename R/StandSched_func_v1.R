@@ -15,7 +15,7 @@
 standSched <- function(site.shp){
 
   #Read in saved schedule from habplan run
-  sched <- read.csv("./example/RCW/RCW/Outputs/saveSched")
+  sched <- read.csv("./Outputs/saveSched")
   #Change column headings so that it's easier to work with
   colnames(sched) <- c("id", "StdID", "sched")
   #Remove any blank spaces that may have been brought in from the import
