@@ -1,6 +1,6 @@
 #' Create block size constraint data
 #'
-#' Creates flow files from csv input data
+#' Creates block data files from .shp input data
 #' @param std.data Forest stand, regime, and outcome information
 #' @param std.info Additional stand information
 #' @param site.shp SpatVector file of study area (forest stands)
