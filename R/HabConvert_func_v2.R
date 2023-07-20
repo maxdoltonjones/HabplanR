@@ -36,6 +36,9 @@ habConvert <- function(std.data, std.info, col, nyear, HSI = NA){
   #Create list to store stand data
   std.list <- vector(mode = "list", length = length(std.id))
 
+  #Merge std.data and std.info
+  std.data <- merge(std.data, std.info, by = "StandID")
+
   for (j in 1:length(std.list)) {
     #j<-2
     temp.data <- std.data %>%
