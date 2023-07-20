@@ -45,28 +45,29 @@ HabSpace <- function(site.shp = site.shp, flow = flow, nyear = nyear,
 colnames(flow) <- c("std_id", 1:(ncol(flow)-1))
 
 #Sort shapefile data by stand id
-shp_df <- broom::tidy(site.shp, region = "StdID")
+shp_df <- sf::st_as_sf(site.shp)
 #Merge this with the flow file
-shp.new <- merge(shp_df, flow, by.x="id", by.y="std_id", all.x = TRUE)
+shp.new <- merge(shp_df, flow, by.x="StdID", by.y="std_id" , all.x = TRUE)
 #nyear <- 35
 flow.list.1 <- vector(mode = "list", length = nyear)
-col.num <- 8
+col.num <- ncol(shp_df)
 
 #This loop creates a list of stand id, year, and flow information
 for (p in 1:length(flow.list.1)) {
-  std <- cbind(shp.new[1], shp.new[p+col.num], shp.new[p+col.num+nyear])
+  std <- data.frame(cbind(shp.new[,1], shp.new[,p+col.num], shp.new[,p+col.num+nyear]))
   colnames(std) <- c("id", "year", "flow")
+  std <- std[c(1:3)]
   std$flow <- as.numeric(std$flow)
   std <- as.data.frame(std)
   flow.list.1[[p]] <- std
 }
 
 #Now combine them
-mast.std <- bind_rows(flow.list.1, .id = "column_label")
+mast.std <- bind_rows(flow.list.1)
 #Remove column_label id
-mast.std = subset(mast.std, select = -c(column_label) )
+#mast.std = subset(mast.std, select = -c(column_label) )
 #Create replicates of shapefile data for each year for plotting later
-temp.data <- do.call("rbind", replicate(35, shp_df, simplify = FALSE))
+temp.data <- do.call("rbind", replicate(35, shp.new, simplify = FALSE))
 #Create master data of all information
 new.data <- cbind(mast.std, temp.data)
 #Remove duplicated column heading
@@ -75,7 +76,7 @@ new.data <- new.data[ -c(10) ]
 ##New patch size analysis script##
   ptch.list <- vector(mode = "list", length = nyear)
   for (i in 1:nyear) {
-    #i <- 1
+    #i <- 3
     data <- new.data %>%
       filter(year == i)
 
@@ -87,19 +88,20 @@ new.data <- new.data[ -c(10) ]
     new.id <- data.2$id
 
     #We can subset shapefiles using the following:
-    std.shp <- subset(site.shp, StdID %in% new.id)
+    std.shp <- subset(shp.new, StdID %in% new.id)
     #plot(std.shp)
     #Convert shapefile into raster
     site.vect <- vect(std.shp)
+    #plot(site.vect)
     raster_template <- rast(ext(site.vect), resolution = 10,
                             crs = "+proj=utm +zone=16 +datum=NAD83 +units=m +no_defs")
     site.rast <- rasterize(site.vect, raster_template)
     ##Start lsm tests##
     #lsm.test <- lsm_p_enn(site.rast)
     lsm.test <- calculate_lsm(site.rast, level = level)
-    lsm.test
+    #lsm.test
     write_csv(x = lsm.test,
-              file = paste0("./Outputs/Patch_maps/lsm_sum_", i, ".csv"))
+              file = paste0("./Outputs/Patch_maps/Data/lsm_sum_", i, ".csv"))
     ##End lsm tests##
 
     #plot(site.vect)
@@ -118,14 +120,20 @@ new.data <- new.data[ -c(10) ]
       test <- patches(site.rast, allowGaps = F)
       #Convert patch Spatraster to Spatvector
       vect.test <- as.polygons(test)
+      #plot(vect.test.2)
       #Find patches which are close enough to move between (default = 500)
       nby.test <- nearby(vect.test, distance = dist)
+      #nby.test <- adjacent(site.shp, pairs = T)
       #Convert to data frame
       nby.test <- data.frame(nby.test)
       #New nested loop to replace patch values for larger patches
       #This is based on the patches that are accessible
+      if(nrow(nby.test) < 1){
+        test <- test
+      }else if(nrow(nby.test) > 0) {
       for(k in 1:nrow(nby.test)){
         test <- classify(test, cbind(nby.test[k,1], nby.test[k,2]))
+      }
       }
       ptch.size <- cellSize(test, unit="ha") |> zonal(test, sum)
       ptch.size$area <- round(ptch.size$area, digits = 2)
@@ -147,12 +155,12 @@ new.data <- new.data[ -c(10) ]
 
     rcw.shp
 
-    ggsave(file = paste0("./Outputs/Patch_maps/Patch_map_", i, ".png"),
+    ggsave(file = paste0("./Outputs/Patch_maps/Figures/Patch_map_", i, ".png"),
            width = 200, height = 120, dpi = 600, units = "mm")
   }
   patch.data <- bind_rows(ptch.list, .id = "year")
   write_csv(x = patch.data,
-            file = "./example/RCW/RCW/Outputs/Patch_maps/Patch_data.csv")
+            file = "./Outputs/Patch_maps/Data/Patch_data.csv")
 
   ptch.list.2 <- vector(mode = "list", length = nyear)
   for (j in 1:nyear) {
@@ -187,7 +195,7 @@ new.data <- new.data[ -c(10) ]
 
   max.ptch
 
-  ggsave(file = paste0("./Outputs/Patch_maps/Max_patch.png"),
+  ggsave(file = paste0("./Outputs/Patch_maps/Figures/Max_patch.png"),
          width = 200, height = 120, dpi = 600, units = "mm")
 
   #Plot patch summary figures
@@ -202,7 +210,7 @@ new.data <- new.data[ -c(10) ]
 
   min.ptch
 
-  ggsave(file = paste0("./Outputs/Patch_maps/Min_patch.png"),
+  ggsave(file = paste0("./Outputs/Patch_maps/Figures/Min_patch.png"),
          width = 200, height = 120, dpi = 600, units = "mm")
 
   #Plot patch summary figures
@@ -217,7 +225,7 @@ new.data <- new.data[ -c(10) ]
 
   mean.ptch
 
-  ggsave(file = paste0("./Outputs/Patch_maps/Mean_patch.png"),
+  ggsave(file = paste0("./Outputs/Patch_maps/Figures/Mean_patch.png"),
          width = 200, height = 120, dpi = 600, units = "mm")
 
   #Plot patch summary figures
@@ -232,7 +240,7 @@ new.data <- new.data[ -c(10) ]
 
   tot.ptch
 
-  ggsave(file = paste0("./Outputs/Patch_maps/Total_patch.png"),
+  ggsave(file = paste0("./Outputs/Patch_maps/Figures/Total_patch.png"),
          width = 200, height = 120, dpi = 600, units = "mm")
 
   #Plot patch summary figures
@@ -247,15 +255,16 @@ new.data <- new.data[ -c(10) ]
 
   sum.ptch
 
-  ggsave(file = paste0("./Outputs/Patch_maps/Tot_num_patch.png"),
+  ggsave(file = paste0("./Outputs/Patch_maps/Figures/Tot_num_patch.png"),
          width = 200, height = 120, dpi = 600, units = "mm")
 
   colnames(patch.sum) <- c("Year", "Number of patches", "Min. patch size",
                            "Max. patch size", "Mean patch size", "Total area")
   write_csv(x = patch.sum,
-            file = "./Outputs/Patch_maps/Patch_data_summary.csv")
+            file = "./Outputs/Patch_maps/Data/Patch_data_summary.csv")
 
 
   return(patch.sum)
 }
+
 
