@@ -36,12 +36,11 @@ habConvert <- function(std.data, std.info, col, nyear, HSI = NA){
   #Create list to store stand data
   std.list <- vector(mode = "list", length = length(std.id))
 
-  #Merge std.data and std.info
-  std.data <- merge(std.data, std.info, by = "StandID")
+  std.data.2 <- merge(std.data, std.info, by.x = "StandID", by.y = "std_id")
 
   for (j in 1:length(std.list)) {
-    #j<-2
-    temp.data <- std.data %>%
+    #j<-505
+    temp.data <- std.data.2 %>%
       filter(StandID == std.id[j])
 
     regim <- unique(temp.data$RegimeKey)
@@ -52,10 +51,11 @@ habConvert <- function(std.data, std.info, col, nyear, HSI = NA){
 
     for (i in 1:length(regim)) {
       #i <- 2
-      #\col <- 14
+      #col <- 36
       if(colnames(temp.data[col]) == "HSI") {
         hsi.data <- temp.data
         hsi.data$HSI2 <- NA
+        #HSI <- 0.7
         hsi.data$HSI2[hsi.data$HSI > HSI] <- hsi.data$acres[hsi.data$HSI > HSI]
         #hsi.data <- hsi.data %>%
         #  replace(is.na(.), 0)
@@ -111,7 +111,7 @@ habConvert <- function(std.data, std.info, col, nyear, HSI = NA){
     std.list[[j]] <- vec
   }
   final.data <- unlist(std.list)
-  data.file <- file(paste0("./Flows/", colnames(temp.data[col]), ".dat"))
+  data.file <- file(paste0("./", colnames(temp.data[col]), ".dat"))
   writeLines(final.data, data.file)
   close(data.file)
   return(final.data)
