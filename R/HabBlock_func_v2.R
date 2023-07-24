@@ -66,7 +66,7 @@ HabBlock <- function(std.data, std.info, site.shp, block.title){
   }
 
   final.data <- unlist(adj.list)
-  data.file <- file(paste0("./example/RCW/RCW/Flows/", block.title, ".txt"))
+  data.file <- file(paste0("./", block.title, ".txt"))
   writeLines(final.data, data.file)
   close(data.file)
   return(final.data)
