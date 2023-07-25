@@ -20,17 +20,17 @@
 
 comPlot <- function(flow.data.1, flow.data.2, flow.data.3,
                     nyear){
-
+  
   flow.list.1 <- vector(mode = "list", length = nyear)
-
+  
   #First flow here
   #Format flow file to remove commas and extra column
-  for (i in 1:ncol(flow.data)) {
-    flow.data[,i] <- gsub(",", "", flow.data[,i])
+  for (i in 1:ncol(flow.data.1)) {
+    flow.data.1[,i] <- gsub(",", "", flow.data.1[,i])
   }
-  flow1 <- flow.data[,-1]
+  flow1 <- flow.data.1[,-1]
   
-  for (i in 1:length(flow.list)) {
+  for (i in 1:length(flow.list.1)) {
     std <- cbind(flow1[1], flow1[i+2], flow1[i+37])
     colnames(std) <- c("id", "year", "flow")
     #std$flow <- gsub('[,]', '', std$flow)
@@ -38,9 +38,9 @@ comPlot <- function(flow.data.1, flow.data.2, flow.data.3,
     #std$id <- gsub('[,]', '', std$id)
     std$flow <- as.numeric(std$flow)
     tot.flow <- sum(std$flow)
-    flow.list[i] <- tot.flow
+    flow.list.1[i] <- tot.flow
   }
-
+  
   year <- c(1:nyear)
   flow <- t(flow.list.1)
   flow <- t(flow)
@@ -50,7 +50,7 @@ comPlot <- function(flow.data.1, flow.data.2, flow.data.3,
   f1.output$flow <- as.numeric(f1.output$flow)
   f1.output$year <- as.numeric(f1.output$year)
   f1.output$num <- "flow 1"
-
+  
   #Second flow here
   flow.list.2 <- vector(mode = "list", length = nyear)
   #Format flow file to remove commas and extra column
@@ -59,14 +59,14 @@ comPlot <- function(flow.data.1, flow.data.2, flow.data.3,
   }
   flow1 <- flow.data.2[,-1]
   
-  for (i in 1:length(flow.list)) {
+  for (i in 1:length(flow.list.2)) {
     std <- cbind(flow1[1], flow1[i+2], flow1[i+37])
     colnames(std) <- c("id", "year", "flow")
     std$flow <- as.numeric(std$flow)
     tot.flow <- sum(std$flow)
-    flow.list[i] <- tot.flow
+    flow.list.2[i] <- tot.flow
   }
-
+  
   year <- c(1:nyear)
   flow <- t(flow.list.2)
   flow <- t(flow)
@@ -76,7 +76,7 @@ comPlot <- function(flow.data.1, flow.data.2, flow.data.3,
   f2.output$flow <- as.numeric(f2.output$flow)
   f2.output$year <- as.numeric(f2.output$year)
   f2.output$num <- "flow 2"
-
+  
   #Third flow here
   flow.list.3 <- vector(mode = "list", length = nyear)
   #Format flow file to remove commas and extra column
@@ -85,14 +85,14 @@ comPlot <- function(flow.data.1, flow.data.2, flow.data.3,
   }
   flow1 <- flow.data.3[,-1]
   
-  for (i in 1:length(flow.list)) {
+  for (i in 1:length(flow.list.3)) {
     std <- cbind(flow1[1], flow1[i+2], flow1[i+37])
     colnames(std) <- c("id", "year", "flow")
     std$flow <- as.numeric(std$flow)
     tot.flow <- sum(std$flow)
-    flow.list[i] <- tot.flow
+    flow.list.3[i] <- tot.flow
   }
-
+  
   year <- c(1:nyear)
   flow <- t(flow.list.3)
   flow <- t(flow)
@@ -102,9 +102,9 @@ comPlot <- function(flow.data.1, flow.data.2, flow.data.3,
   f3.output$flow <- as.numeric(f3.output$flow)
   f3.output$year <- as.numeric(f3.output$year)
   f3.output$num <- "flow 3"
-
+  
   all.output <- rbind(f1.output, f2.output, f3.output)
-
+  
   #library(ggplot2)
   f1.plot <- ggplot(data = all.output) +
     geom_line(data = all.output, aes(x = year, y = flow, group = num, color = num),
@@ -124,9 +124,10 @@ comPlot <- function(flow.data.1, flow.data.2, flow.data.3,
     theme_classic() +
     guides(color = guide_legend(title = "Flow #"), fill = guide_legend(title = "Flow #"))
   #theme(legend.position = "none")
-
+  
   ggsave(file = paste0("./Combined_flows.png"), width = 200, height = 120,
          dpi = 600, units = "mm")
-
+  
   return(f1.plot)
 }
+
