@@ -17,14 +17,15 @@ flowPlot <- function(flow.data, nyear){
   #Set the length below as the number of years in model
   flow.list <- vector(mode = "list", length = nyear)
 
-  flow1 <- flow.data
-
+  #Format flow file to remove commas and extra column
+  for (i in 1:ncol(flow.data)) {
+    flow.data[,i] <- gsub(",", "", flow.data[,i])
+  }
+  flow1 <- flow.data[,-1]
+  
   for (i in 1:length(flow.list)) {
-    std <- cbind(flow1[2], flow1[i+3], flow1[i+36])
+    std <- cbind(flow1[1], flow1[i+2], flow1[i+37])
     colnames(std) <- c("id", "year", "flow")
-    std$flow <- gsub('[,]', '', std$flow)
-    std$year <- gsub('[,]', '', std$year)
-    std$id <- gsub('[,]', '', std$id)
     std$flow <- as.numeric(std$flow)
     tot.flow <- sum(std$flow)
     flow.list[i] <- tot.flow
