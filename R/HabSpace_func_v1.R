@@ -166,7 +166,7 @@ new.data <- new.data[ -c(10) ]
   }
   patch.data <- bind_rows(ptch.list, .id = "year")
   write_csv(x = patch.data,
-            file = "./Outputs/Patch_maps/Data/Patch_data.csv")
+            file = "./Patch_data.csv")
 
   ptch.list.2 <- vector(mode = "list", length = nyear)
   for (j in 1:nyear) {
