@@ -41,6 +41,12 @@
 HabSpace <- function(site.shp = site.shp, flow = flow, nyear = nyear,
                      mode = "terrestrial", dist = 500, level = "patch"){
 
+  #Format flow file to remove commas and extra column
+  for (i in 1:ncol(flow)) {
+    flow[,i] <- gsub(",", "", flow[,i])
+  }
+  flow <- flow[,-1]
+  
   #Rename column headings of flow file to apply to any flow file input
 colnames(flow) <- c("std_id", 1:(ncol(flow)-1))
 
