@@ -24,17 +24,21 @@ comPlot <- function(flow.data.1, flow.data.2, flow.data.3,
   flow.list.1 <- vector(mode = "list", length = nyear)
 
   #First flow here
-  flow1 <- flow.data.1
-
-  for (i in 1:length(flow.list.1)) {
-    std <- cbind(flow1[2], flow1[i+3], flow1[i+36])
+  #Format flow file to remove commas and extra column
+  for (i in 1:ncol(flow.data)) {
+    flow.data[,i] <- gsub(",", "", flow.data[,i])
+  }
+  flow1 <- flow.data[,-1]
+  
+  for (i in 1:length(flow.list)) {
+    std <- cbind(flow1[1], flow1[i+2], flow1[i+37])
     colnames(std) <- c("id", "year", "flow")
-    std$flow <- gsub('[,]', '', std$flow)
-    std$year <- gsub('[,]', '', std$year)
-    std$id <- gsub('[,]', '', std$id)
+    #std$flow <- gsub('[,]', '', std$flow)
+    #std$year <- gsub('[,]', '', std$year)
+    #std$id <- gsub('[,]', '', std$id)
     std$flow <- as.numeric(std$flow)
     tot.flow <- sum(std$flow)
-    flow.list.1[i] <- tot.flow
+    flow.list[i] <- tot.flow
   }
 
   year <- c(1:nyear)
@@ -49,17 +53,18 @@ comPlot <- function(flow.data.1, flow.data.2, flow.data.3,
 
   #Second flow here
   flow.list.2 <- vector(mode = "list", length = nyear)
-  flow1 <- flow.data.2
-
-  for (i in 1:length(flow.list.2)) {
-    std <- cbind(flow1[2], flow1[i+3], flow1[i+36])
+  #Format flow file to remove commas and extra column
+  for (i in 1:ncol(flow.data.2)) {
+    flow.data.2[,i] <- gsub(",", "", flow.data.2[,i])
+  }
+  flow1 <- flow.data.2[,-1]
+  
+  for (i in 1:length(flow.list)) {
+    std <- cbind(flow1[1], flow1[i+2], flow1[i+37])
     colnames(std) <- c("id", "year", "flow")
-    std$flow <- gsub('[,]', '', std$flow)
-    std$year <- gsub('[,]', '', std$year)
-    std$id <- gsub('[,]', '', std$id)
     std$flow <- as.numeric(std$flow)
     tot.flow <- sum(std$flow)
-    flow.list.2[i] <- tot.flow
+    flow.list[i] <- tot.flow
   }
 
   year <- c(1:nyear)
@@ -74,17 +79,18 @@ comPlot <- function(flow.data.1, flow.data.2, flow.data.3,
 
   #Third flow here
   flow.list.3 <- vector(mode = "list", length = nyear)
-  flow1 <- flow.data.3
-
-  for (i in 1:length(flow.list.3)) {
-    std <- cbind(flow1[2], flow1[i+3], flow1[i+36])
+  #Format flow file to remove commas and extra column
+  for (i in 1:ncol(flow.data.3)) {
+    flow.data.3[,i] <- gsub(",", "", flow.data.3[,i])
+  }
+  flow1 <- flow.data.3[,-1]
+  
+  for (i in 1:length(flow.list)) {
+    std <- cbind(flow1[1], flow1[i+2], flow1[i+37])
     colnames(std) <- c("id", "year", "flow")
-    std$flow <- gsub('[,]', '', std$flow)
-    std$year <- gsub('[,]', '', std$year)
-    std$id <- gsub('[,]', '', std$id)
     std$flow <- as.numeric(std$flow)
     tot.flow <- sum(std$flow)
-    flow.list.3[i] <- tot.flow
+    flow.list[i] <- tot.flow
   }
 
   year <- c(1:nyear)
