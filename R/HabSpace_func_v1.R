@@ -107,7 +107,7 @@ new.data <- new.data[ -c(10) ]
     lsm.test <- calculate_lsm(site.rast, level = level)
     #lsm.test
     write_csv(x = lsm.test,
-              file = paste0("./Outputs/Patch_maps/Data/lsm_sum_", i, ".csv"))
+              file = paste0("./lsm_sum_", i, ".csv"))
     ##End lsm tests##
 
     #plot(site.vect)
@@ -161,7 +161,7 @@ new.data <- new.data[ -c(10) ]
 
     rcw.shp
 
-    ggsave(file = paste0("./Outputs/Patch_maps/Figures/Patch_map_", i, ".png"),
+    ggsave(file = paste0("./Patch_map_", i, ".png"),
            width = 200, height = 120, dpi = 600, units = "mm")
   }
   patch.data <- bind_rows(ptch.list, .id = "year")
@@ -201,7 +201,7 @@ new.data <- new.data[ -c(10) ]
 
   max.ptch
 
-  ggsave(file = paste0("./Outputs/Patch_maps/Figures/Max_patch.png"),
+  ggsave(file = paste0("./Max_patch.png"),
          width = 200, height = 120, dpi = 600, units = "mm")
 
   #Plot patch summary figures
@@ -216,7 +216,7 @@ new.data <- new.data[ -c(10) ]
 
   min.ptch
 
-  ggsave(file = paste0("./Outputs/Patch_maps/Figures/Min_patch.png"),
+  ggsave(file = paste0("./Min_patch.png"),
          width = 200, height = 120, dpi = 600, units = "mm")
 
   #Plot patch summary figures
@@ -231,7 +231,7 @@ new.data <- new.data[ -c(10) ]
 
   mean.ptch
 
-  ggsave(file = paste0("./Outputs/Patch_maps/Figures/Mean_patch.png"),
+  ggsave(file = paste0("./Mean_patch.png"),
          width = 200, height = 120, dpi = 600, units = "mm")
 
   #Plot patch summary figures
@@ -246,7 +246,7 @@ new.data <- new.data[ -c(10) ]
 
   tot.ptch
 
-  ggsave(file = paste0("./Outputs/Patch_maps/Figures/Total_patch.png"),
+  ggsave(file = paste0("./Total_patch.png"),
          width = 200, height = 120, dpi = 600, units = "mm")
 
   #Plot patch summary figures
@@ -261,13 +261,13 @@ new.data <- new.data[ -c(10) ]
 
   sum.ptch
 
-  ggsave(file = paste0("./Outputs/Patch_maps/Figures/Tot_num_patch.png"),
+  ggsave(file = paste0("./Tot_num_patch.png"),
          width = 200, height = 120, dpi = 600, units = "mm")
 
   colnames(patch.sum) <- c("Year", "Number of patches", "Min. patch size",
                            "Max. patch size", "Mean patch size", "Total area")
   write_csv(x = patch.sum,
-            file = "./Outputs/Patch_maps/Data/Patch_data_summary.csv")
+            file = "./Patch_data_summary.csv")
 
 
   return(patch.sum)
