@@ -29,26 +29,24 @@
 #'
 #' @export
 
-HSIcalc <- function(std.data, equation, logistic = T){
-
-  if(logistic == T){
-  # Define the logistic function (setting the HSI between 0-1)
-  log.func <- function(x) {
-    return(1 / (1 + exp(-x)))
+HSIcalc <- function (std.data, equation, logistic = T) 
+{
+  if (logistic == T) {
+    log.func <- function(x) {
+      return(1/(1 + exp(-x)))
+    }
+    y <- log.func(equation())
   }
-  #Run the function
-  y <- log.func(equation())
-  } else{
+  else {
     y <- equation()
   }
-  #y <- equation()
-  #convert to data frame
   y <- data.frame(y)
-  #rename for HSI
   colnames(y) <- "HSI"
-  #bind stand data and HSI values
-  std.data.new <- cbind(std.data, y)
-
+  if("HSI" %in% colnames(std.data)){
+  std.data.new = subset(std.data, select = -c(HSI))
+  } else {
+    std.data.new <- std.data
+  }
+  std.data.new$HSI <- y$HSI
   return(std.data.new)
-
 }
