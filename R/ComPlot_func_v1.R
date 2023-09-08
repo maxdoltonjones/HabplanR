@@ -111,10 +111,8 @@ comPlot <- function(flow.data.1, flow.data.2, flow.data.3,
               position = "identity") +
     geom_area(data = all.output, aes(x = year, y = flow, group = num, fill = num),
               alpha = 0.5, position = "identity") +
-    #ylim(0, 10000) +
-    #geom_hline(yintercept = target, linetype = 2, color = "red") +
-    #geom_hline(yintercept = (target+th.hi), linetype = 2, color = "black") +
-    #geom_hline(yintercept = (target-th.lo), linetype = 2, color = "black") +
+    scale_x_continuous(expand = c(0, 0)) +
+    scale_y_continuous(expand = c(0, 0)) +
     scale_color_viridis_d(option = "viridis", begin = 0.3, end = 0.6) +
     scale_fill_viridis_d(option = "viridis", begin = 0.3, end = 0.6) +
     scale_x_continuous(breaks=seq(0,nyear,5)) +
