@@ -54,6 +54,8 @@ flowPlot <- function(flow.data, nyear){
     theme_classic() +
     theme(legend.position = "none")
 
+  f1.plot + scale_x_continuous(expand = c(0, 0)) + scale_y_continuous(expand = c(0, 0))
+
   ggsave(file = paste0("./Single_flow.png"), width = 200, height = 120,
          dpi = 600, units = "mm")
 
