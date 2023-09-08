@@ -51,7 +51,7 @@ flowPlot <- function(flow.data, nyear){
     ylab("Flow") +
     theme_classic() +
     theme(legend.position = "none",
-         text = element_text(size=20))
+         text = element_text(size=18))
 
   ggsave(file = paste0("./Single_flow.png"), width = 200, height = 120,
          dpi = 600, units = "mm")
