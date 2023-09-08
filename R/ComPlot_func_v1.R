@@ -119,8 +119,8 @@ comPlot <- function(flow.data.1, flow.data.2, flow.data.3,
     xlab("Year") +
     ylab("Flow") +
     theme_classic() +
-    guides(color = guide_legend(title = "Flow #"), fill = guide_legend(title = "Flow #"))
-  #theme(legend.position = "none")
+    guides(color = guide_legend(title = "Flow #"), fill = guide_legend(title = "Flow #")) +
+  theme(text = element_text(size=18))
   
   ggsave(file = paste0("./Combined_flows.png"), width = 200, height = 120,
          dpi = 600, units = "mm")
