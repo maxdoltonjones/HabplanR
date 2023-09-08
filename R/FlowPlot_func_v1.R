@@ -50,7 +50,8 @@ flowPlot <- function(flow.data, nyear){
     xlab("Year") +
     ylab("Flow") +
     theme_classic() +
-    theme(legend.position = "none")
+    theme(legend.position = "none",
+         text = element_text(size=20))
 
   ggsave(file = paste0("./Single_flow.png"), width = 200, height = 120,
          dpi = 600, units = "mm")
