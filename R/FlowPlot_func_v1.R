@@ -44,17 +44,13 @@ flowPlot <- function(flow.data, nyear){
   f1.plot <- ggplot(data = f1.output) +
     geom_line(aes(x = year, y = flow)) +
     geom_area(aes(x = year, y = flow), fill = "grey", alpha = 0.7) +
-    #geom_hline(yintercept = target, linetype = 2, color = "red") +
-    #geom_hline(yintercept = (target+th.hi), linetype = 2, color = "black") +
-    #geom_hline(yintercept = (target-th.lo), linetype = 2, color = "black") +
-    #scale_color_viridis_d() +
+    scale_x_continuous(expand = c(0, 0)) +
+    scale_y_continuous(expand = c(0, 0)) +
     ggtitle("Flow output over time") +
     xlab("Year") +
     ylab("Flow") +
     theme_classic() +
     theme(legend.position = "none")
-
-  f1.plot + scale_x_continuous(expand = c(0, 0)) + scale_y_continuous(expand = c(0, 0))
 
   ggsave(file = paste0("./Single_flow.png"), width = 200, height = 120,
          dpi = 600, units = "mm")
